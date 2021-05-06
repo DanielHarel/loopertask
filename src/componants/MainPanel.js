@@ -691,7 +691,7 @@ const MainPanel = () => {
                         <Button  startIcon={<FiberManualRecordIcon/>} value='record' onClick={handleClick} variant={clickedRecord ? "outlined" : "contained"}  className={classes.buttonComponant}></Button>
                     </Grid>
                     <Grid item>
-                        <Button disabled={recording.length === 0 && !clickedPlay} value='playRecording' onClick={handleClick} variant={clickedPlayRecording ? "outlined" : "contained"}  className={classes.buttonComponant}>Play Recording</Button>
+                        <Button disabled={recording.length === 0 || !clickedPlay} value='playRecording' onClick={handleClick} variant={clickedPlayRecording ? "outlined" : "contained"}  className={classes.buttonComponant}>Play Recording</Button>
                     </Grid>
                 </Grid>
             }

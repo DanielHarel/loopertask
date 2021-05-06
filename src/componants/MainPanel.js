@@ -80,6 +80,7 @@ const MainPanel = () => {
     const [anyPlaying, setAnyPlaying] = useState(false);
     const [nextInterval, setNextInterval] = useState(0);
     const [recording, setRecording] = useState([]);
+    const [sessionEnded, setSessionEnded] = useState(false);
 
     // all states require current ref so that setTimeout function evaluates in real time with current state
     const clicked1Ref = useRef(clicked1);
@@ -588,6 +589,7 @@ const MainPanel = () => {
             case "stop":
                 if (clickedRecordRef.current) {
                     setRecordingTimer(timer);
+                    setSessionEnded(!sessionEnded);
                 }
                 if (clickedPlayRecording.current) {
                     autoPlayer('10', false);
@@ -675,7 +677,7 @@ const MainPanel = () => {
                             <Button  startIcon={<FiberManualRecordIcon/>} value='record' onClick={handleClick} variant={clickedRecord ? "outlined" : "contained"}  className={classes.buttonComponant}></Button>
                         </Grid>
                         <Grid item>
-                            <Button disabled={recording.length === 0 && !clickedPlay} value='playRecording' onClick={handleClick} variant={clickedPlayRecording ? "outlined" : "contained"}  className={classes.buttonComponant}>Play Recording</Button>
+                            <Button disabled={recording.length === 0 && !sessionEnded} value='playRecording' onClick={handleClick} variant={clickedPlayRecording ? "outlined" : "contained"}  className={classes.buttonComponant}>Play Recording</Button>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -691,7 +693,7 @@ const MainPanel = () => {
                         <Button  startIcon={<FiberManualRecordIcon/>} value='record' onClick={handleClick} variant={clickedRecord ? "outlined" : "contained"}  className={classes.buttonComponant}></Button>
                     </Grid>
                     <Grid item>
-                        <Button disabled={recording.length === 0} value='playRecording' onClick={handleClick} variant={clickedPlayRecording ? "outlined" : "contained"}  className={classes.buttonComponant}>Play Recording</Button>
+                        <Button disabled={recording.length === 0 && !sessionEnded} value='playRecording' onClick={handleClick} variant={clickedPlayRecording ? "outlined" : "contained"}  className={classes.buttonComponant}>Play Recording</Button>
                     </Grid>
                 </Grid>
             }
